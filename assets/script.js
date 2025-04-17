@@ -197,7 +197,7 @@ class GitHubActionTrigger extends HTMLElement {
 		const payload = {
 			event_type: "append-date",
 			client_payload: {
-				line: ["Dom 2025-04-11,2025-04-12"],
+				line: "Dom 2025-04-11,2025-04-12",
 			},
 		};
 
