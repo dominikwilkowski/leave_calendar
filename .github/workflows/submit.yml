@@ -1,0 +1,30 @@
+name: Save Date
+
+on:
+  repository_dispatch:
+
+jobs:
+  append-date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Extract date from client_payload and save into log file
+        working-directory: ${{ github.workspace }}
+        run: |
+          mkdir -p _includes
+          echo "${{ github.event.client_payload.line }}" >> _includes/dates.log
+
+      - name: Commit and push changes
+        run: |
+          git add dates.log
+          git commit -m "Append line \"${{ github.event.client_payload.line }}\""
+          git push
