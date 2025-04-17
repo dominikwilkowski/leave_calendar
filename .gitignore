@@ -144,6 +144,3 @@ _site
 .jekyll-metadata
 vendor
 Gemfile.lock
-
-# env files
-_includes/env.js
