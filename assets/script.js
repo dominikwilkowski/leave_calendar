@@ -190,8 +190,8 @@ class GitHubActionTrigger extends HTMLElement {
 	}
 
 	triggerAction(token) {
-		const ORG = process.env.ORG;
-		const repo = process.env.REPO;
+		const ORG = window.ENV.ORG;
+		const repo = window.ENV.REPO;
 
 		const url = `https://api.github.com/repos/${ORG}/${repo}/dispatches`;
 		const payload = {

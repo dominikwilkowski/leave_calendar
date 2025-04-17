@@ -23,8 +23,15 @@ jobs:
           mkdir -p _includes
           echo "${{ github.event.client_payload.line }}" >> _includes/dates.log
 
+      - name: Inject public-safe env values
+        run: |
+          echo "<script>window.ENV = {" > _includes/env.js
+          echo "ORG: '${{ secrets.PUBLIC_ORG }}'," >> _includes/env.js
+          echo "REPO: '${{ secrets.PUBLIC_REPO }}'" >> _includes/env.js
+          echo "};</script>" >> _includes/env.js
+
       - name: Commit and push changes
         run: |
-          git add dates.log
+          git add _includes/dates.log
           git commit -m "Append line \"${{ github.event.client_payload.line }}\""
           git push
